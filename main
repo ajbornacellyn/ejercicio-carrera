@@ -1,0 +1,57 @@
+import java.util.*;
+
+public class Main {
+    private static final Map<String, Map<String, List<String>>> categorias = new HashMap<>();
+
+    public static void main(String[] args) {
+        inicializarParticipantes();
+        inicializarCategorias();
+        mostrarIntegrantesCategoria("Circuito chico");
+    }
+
+    public static void inicializarParticipantes() {
+        Map<String, List<String>> participantesCircuitoChico = new HashMap<>();
+        List<String> infoParticipante1 = Arrays.asList("tomas", "ledesma", "22", "11202020", "911", "O+");
+        List<String> infoParticipante2 = Arrays.asList("juan", "perez", "25", "12202020", "922", "A-");
+
+        participantesCircuitoChico.put("202020", infoParticipante1);
+        participantesCircuitoChico.put("303030", infoParticipante2);
+
+        categorias.put("Circuito chico", participantesCircuitoChico);
+        // También se pueden agregar más categorías aquí si es necesario.
+    }
+
+    public static void inicializarCategorias() {
+        Map<String, List<String>> infoCircuitoChico = new HashMap<>();
+        List<String> descripcionCircuitoChico = Arrays.asList("1", "2 km por selva y arroyos.");
+        infoCircuitoChico.put("descripcion", descripcionCircuitoChico);
+
+        categorias.put("Circuito chico", infoCircuitoChico);
+        // También se pueden agregar más categorías aquí si es necesario.
+    }
+
+    public static void mostrarIntegrantesCategoria(String categoria) {
+        System.out.println("Integrantes de la categoría " + categoria + ":");
+        Map<String, List<String>> participantesCategoria = categorias.get(categoria);
+        if (participantesCategoria != null) {
+            for (Map.Entry<String, List<String>> entry : participantesCategoria.entrySet()) {
+                String dni = entry.getKey();
+                List<String> infoParticipante = entry.getValue();
+                System.out.println("DNI: " + dni);
+                System.out.println("Nombre: " + infoParticipante.get(0));
+                System.out.println("Apellido: " + infoParticipante.get(1));
+                System.out.println("Edad: " + infoParticipante.get(2));
+                System.out.println("Fecha de nacimiento: " + infoParticipante.get(3));
+                System.out.println("Teléfono: " + infoParticipante.get(4));
+                System.out.println("Grupo sanguíneo: " + infoParticipante.get(5));
+                System.out.println();
+            }
+            List<String> infoCategoria = participantesCategoria.get("descripcion");
+            System.out.println("Información de la categoría:");
+            System.out.println("Duración: " + infoCategoria.get(0));
+            System.out.println("Descripción: " + infoCategoria.get(1));
+        } else {
+            System.out.println("No hay inscritos en la categoría " + categoria);
+        }
+    }
+}
